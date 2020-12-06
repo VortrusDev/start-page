@@ -3,22 +3,55 @@
  * it appear in the list
  */
 
-import { PureComponent } from "react";
+import { ChangeEvent, PureComponent } from "react";
 
-interface AddLinkModalProps {}
+interface AddLinkModalProps {
+  onAddLink: (link: string) => void;
+}
 
-interface AddLinkModalState {}
+interface AddLinkModalState {
+  link: string;
+}
 
 export class AddLinkModal extends PureComponent<
   AddLinkModalProps,
   AddLinkModalState
 > {
+  constructor(props: AddLinkModalProps) {
+    super(props);
+
+    this.state = {
+      link: "",
+    };
+  }
+
+  handleAddLink = () => {
+    this.props.onAddLink(this.state.link);
+  };
+
+  handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    this.setState({ link: event.target.value });
+  };
+
   render() {
     return (
-      <>
+      <div>
         <h3>Add a link</h3>
-        <input type="text"></input>
-      </>
+        <form
+          id="Add-link-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            this.handleAddLink();
+          }}
+        >
+          <input
+            type="text"
+            value={this.state.link}
+            onChange={this.handleChange}
+            form="Add-link-form"
+          ></input>
+        </form>
+      </div>
     );
   }
 }

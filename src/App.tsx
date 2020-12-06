@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+
 import { getCurrentMoonPhase } from "./helpers";
 import { AddLinkModal } from "./components/AddLinkModal";
 import { NavBar } from "./components/NavBar";
@@ -22,15 +23,19 @@ class App extends PureComponent<AppProps, AppState> {
     };
   }
 
-  handleAddLink = () => {
-    console.log("You're adding a link");
+  handleAddLinkPopup = () => {
+    console.log("Opening the Add Link dialogue box");
     this.setState({ AddingLink: true });
+  };
+
+  handleAddLink = (link: string) => {
+    console.log("Adding link " + link);
   };
 
   render() {
     return (
       <div className="App">
-        <NavBar onAddLink={this.handleAddLink} />
+        <NavBar onClickAddLink={this.handleAddLinkPopup} />
         <header className="App-header">
           <h1>Hello and welcome!</h1>
           <h2 className="App-description">
@@ -52,7 +57,9 @@ class App extends PureComponent<AppProps, AppState> {
               Search
             </button>
           </form>
-          {this.state.AddingLink && <AddLinkModal />}
+          {this.state.AddingLink && (
+            <AddLinkModal onAddLink={this.handleAddLink} />
+          )}
         </header>
       </div>
     );
