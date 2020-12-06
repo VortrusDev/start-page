@@ -3,10 +3,13 @@ import React, { PureComponent } from "react";
 import { getCurrentMoonPhase } from "./helpers";
 import { AddLinkModal } from "./components/AddLinkModal";
 import { NavBar } from "./components/NavBar";
+import { LinkGrid } from "./components/LinkGrid";
 import "bootstrap";
 import "./App.css";
 import "./NavBar.css";
 import "./Popup.css";
+import "./LinkGrid.css";
+import { LinkGridItem } from "./components/LinkGridItem";
 
 interface AppProps {}
 
@@ -73,6 +76,15 @@ class App extends PureComponent<AppProps, AppState> {
               onClose={this.toggleAddingLinkPopup}
             />
           )}
+          <LinkGrid>
+            <LinkGridItem>1</LinkGridItem>
+            <LinkGridItem>1</LinkGridItem>
+            <LinkGridItem>1</LinkGridItem>
+            <LinkGridItem>1</LinkGridItem>
+            <LinkGridItem>1</LinkGridItem>
+            <LinkGridItem>1</LinkGridItem>
+            <LinkGridItem>1</LinkGridItem>
+          </LinkGrid>
         </header>
       </div>
     );

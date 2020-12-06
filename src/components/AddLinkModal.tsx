@@ -34,8 +34,7 @@ export class AddLinkModal extends PureComponent<
     this.setState({ link: event.target.value });
   };
 
-  handleClose = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    console.log(typeof event);
+  handleClose = () => {
     this.props.onClose();
   };
 
