@@ -8,4 +8,6 @@
   margin: auto;
   width: 25vw;
   height: 25vh;
+  z-index: 1; /*So that the div below the popup can be queried to see if the 
+                popup should be hidden*/
 }

@@ -27,17 +27,25 @@ class App extends PureComponent<AppProps, AppState> {
 
   handleAddLinkPopup = () => {
     console.log("Opening the Add Link dialogue box");
-    this.setState({ AddingLink: true });
+    this.toggleAddingLinkPopup();
+  };
+
+  toggleAddingLinkPopup = () => {
+    this.setState({ AddingLink: !this.state.AddingLink });
   };
 
   handleAddLink = (link: string) => {
     console.log("Adding link " + link);
+
+    // Add to user preferences so we can read it when they return
+
+    this.setState({ AddingLink: false });
   };
 
   render() {
     return (
       <div className="App">
-        <NavBar onClickAddLink={this.handleAddLinkPopup} />
+        <NavBar onClickAddLink={this.handleAddLinkPopup} className="NavBar" />
         <header className="App-header">
           <h1>Hello and welcome!</h1>
           <h2 className="App-description">
@@ -60,7 +68,10 @@ class App extends PureComponent<AppProps, AppState> {
             </button>
           </form>
           {this.state.AddingLink && (
-            <AddLinkModal onAddLink={this.handleAddLink} />
+            <AddLinkModal
+              onAddLink={this.handleAddLink}
+              onClose={this.toggleAddingLinkPopup}
+            />
           )}
         </header>
       </div>
