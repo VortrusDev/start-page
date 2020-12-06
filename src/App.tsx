@@ -11,6 +11,8 @@ import "./Popup.css";
 import "./LinkGrid.css";
 import { LinkGridItem } from "./components/LinkGridItem";
 
+const LocalStorageKeyPrefix = "StartPageLink:";
+
 interface AppProps {}
 
 interface AppState {
@@ -21,12 +23,25 @@ class App extends PureComponent<AppProps, AppState> {
   /**
    * The base App that the startpage will run on
    */
+
+  userAddedLinks: string[] = [];
+
   constructor(props: any) {
     super(props);
     this.state = {
       AddingLink: false,
     };
+
+    this.loadLocalStorageKeys();
   }
+
+  loadLocalStorageKeys = () => {
+    for (let key in localStorage) {
+      if (key.startsWith(LocalStorageKeyPrefix)) {
+        this.userAddedLinks.push(localStorage.getItem(key)!);
+      }
+    }
+  };
 
   handleAddLinkPopup = () => {
     console.log("Opening the Add Link dialogue box");
@@ -42,7 +57,15 @@ class App extends PureComponent<AppProps, AppState> {
 
     // Add to user preferences so we can read it when they return
 
+    localStorage.setItem(`${LocalStorageKeyPrefix}${link}`, link);
+
     this.setState({ AddingLink: false });
+  };
+
+  handleRemoveLink = (link: string) => {
+    console.log("removing link " + link);
+
+    localStorage.removeItem(`${LocalStorageKeyPrefix}${link}`);
   };
 
   render() {
@@ -77,13 +100,13 @@ class App extends PureComponent<AppProps, AppState> {
             />
           )}
           <LinkGrid>
-            <LinkGridItem>1</LinkGridItem>
-            <LinkGridItem>1</LinkGridItem>
-            <LinkGridItem>1</LinkGridItem>
-            <LinkGridItem>1</LinkGridItem>
-            <LinkGridItem>1</LinkGridItem>
-            <LinkGridItem>1</LinkGridItem>
-            <LinkGridItem>1</LinkGridItem>
+            {this.userAddedLinks.map((link) => {
+              return (
+                <LinkGridItem key={link} onLinkRemove={this.handleRemoveLink}>
+                  {link}
+                </LinkGridItem>
+              );
+            })}
           </LinkGrid>
         </header>
       </div>
