@@ -35,7 +35,7 @@ export class AddLinkModal extends PureComponent<
 
   render() {
     return (
-      <div>
+      <div className="Popup">
         <h3>Add a link</h3>
         <form
           id="Add-link-form"

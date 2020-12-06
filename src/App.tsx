@@ -5,6 +5,8 @@ import { AddLinkModal } from "./components/AddLinkModal";
 import { NavBar } from "./components/NavBar";
 import "bootstrap";
 import "./App.css";
+import "./NavBar.css";
+import "./Popup.css";
 
 interface AppProps {}
 
