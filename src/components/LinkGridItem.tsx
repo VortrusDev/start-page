@@ -23,7 +23,7 @@ export class LinkGridItem extends PureComponent<
             className="LinkGridItem"
             form={`${this.props.children?.toString()}form`}
           >
-            {this.props.children}
+            {this.props.children?.toString().replace("https://", "")}
           </button>
           <button
             onClick={(event: any) => {

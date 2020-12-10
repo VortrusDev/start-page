@@ -54,7 +54,17 @@ class App extends PureComponent<AppProps, AppState> {
     this.setState({ AddingLink: !this.state.AddingLink });
   };
 
+  fixLinkFormat = (link: string): string => {
+    if (!link.startsWith("http")) {
+      link = "https://" + link;
+    }
+
+    return link;
+  };
+
   handleAddLink = (link: string) => {
+    link = this.fixLinkFormat(link);
+
     console.log("Adding link " + link);
 
     // Add to user preferences so we can read it when they return
