@@ -1,6 +1,8 @@
 import { PureComponent } from "react";
 
-interface LinkGridProps {}
+interface LinkGridProps {
+  toggleRegen: boolean;
+}
 
 interface LinkGridState {}
 

@@ -17,6 +17,7 @@ interface AppProps {}
 
 interface AppState {
   AddingLink: boolean; // Is the user adding a link? Yes if true
+  RegeneratingLink: boolean;
 }
 
 class App extends PureComponent<AppProps, AppState> {
@@ -30,6 +31,7 @@ class App extends PureComponent<AppProps, AppState> {
     super(props);
     this.state = {
       AddingLink: false,
+      RegeneratingLink: false,
     };
 
     this.loadLocalStorageKeys();
@@ -59,6 +61,8 @@ class App extends PureComponent<AppProps, AppState> {
 
     localStorage.setItem(`${LocalStorageKeyPrefix}${link}`, link);
 
+    this.userAddedLinks.push(link);
+
     this.setState({ AddingLink: false });
   };
 
@@ -66,6 +70,14 @@ class App extends PureComponent<AppProps, AppState> {
     console.log("removing link " + link);
 
     localStorage.removeItem(`${LocalStorageKeyPrefix}${link}`);
+    this.userAddedLinks = this.userAddedLinks.filter(
+      (value: string, index: number, arr: string[]) => {
+        return value !== link;
+      }
+    );
+
+    this.setState({ RegeneratingLink: !this.state.RegeneratingLink });
+    console.log(this.userAddedLinks);
   };
 
   render() {
@@ -99,7 +111,7 @@ class App extends PureComponent<AppProps, AppState> {
               onClose={this.toggleAddingLinkPopup}
             />
           )}
-          <LinkGrid>
+          <LinkGrid toggleRegen={this.state.RegeneratingLink}>
             {this.userAddedLinks.map((link) => {
               return (
                 <LinkGridItem key={link} onLinkRemove={this.handleRemoveLink}>
