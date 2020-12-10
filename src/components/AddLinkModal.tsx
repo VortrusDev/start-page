@@ -6,12 +6,13 @@
 import { ChangeEvent, PureComponent } from "react";
 
 interface AddLinkModalProps {
-  onAddLink: (link: string) => void;
+  onAddLink: (link: string, alias?: string) => void;
   onClose: () => void;
 }
 
 interface AddLinkModalState {
   link: string;
+  alias: string; // name for the link on the start page
 }
 
 export class AddLinkModal extends PureComponent<
@@ -23,15 +24,20 @@ export class AddLinkModal extends PureComponent<
 
     this.state = {
       link: "",
+      alias: "",
     };
   }
 
   handleAddLink = () => {
-    this.props.onAddLink(this.state.link);
+    this.props.onAddLink(this.state.link, this.state.alias);
   };
 
-  handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  handleLinkChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ link: event.target.value });
+  };
+
+  handleAliasChange = (event: ChangeEvent<HTMLInputElement>) => {
+    this.setState({ alias: event.target.value });
   };
 
   handleClose = () => {
@@ -61,10 +67,18 @@ export class AddLinkModal extends PureComponent<
               this.handleAddLink();
             }}
           >
+            <p>Link: </p>
             <input
               type="text"
               value={this.state.link}
-              onChange={this.handleChange}
+              onChange={this.handleLinkChange}
+              form="Add-link-form"
+            ></input>
+            <p>Alias: </p>
+            <input
+              type="text"
+              value={this.state.alias}
+              onChange={this.handleAliasChange}
               form="Add-link-form"
             ></input>
             <button form="Add-link-form">Add Link</button>

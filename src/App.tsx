@@ -25,7 +25,7 @@ class App extends PureComponent<AppProps, AppState> {
    * The base App that the startpage will run on
    */
 
-  userAddedLinks: string[] = [];
+  userAddedLinks: { link: string; alias?: string }[] = [];
 
   constructor(props: any) {
     super(props);
@@ -39,8 +39,13 @@ class App extends PureComponent<AppProps, AppState> {
 
   loadLocalStorageKeys = () => {
     for (let key in localStorage) {
-      if (key.startsWith(LocalStorageKeyPrefix)) {
-        this.userAddedLinks.push(localStorage.getItem(key)!);
+      if (key.startsWith(LocalStorageKeyPrefix) && !key.endsWith("_alias")) {
+        this.userAddedLinks.push({
+          link: localStorage.getItem(key)!,
+          alias: localStorage.getItem(key + "_alias")
+            ? localStorage.getItem(key + "_alias")!
+            : "",
+        });
       }
     }
   };
@@ -62,7 +67,7 @@ class App extends PureComponent<AppProps, AppState> {
     return link;
   };
 
-  handleAddLink = (link: string) => {
+  handleAddLink = (link: string, alias?: string) => {
     link = this.fixLinkFormat(link);
 
     console.log("Adding link " + link);
@@ -70,19 +75,23 @@ class App extends PureComponent<AppProps, AppState> {
     // Add to user preferences so we can read it when they return
 
     localStorage.setItem(`${LocalStorageKeyPrefix}${link}`, link);
+    if (alias)
+      localStorage.setItem(`${LocalStorageKeyPrefix}${link}_alias`, alias);
 
-    this.userAddedLinks.push(link);
+    this.userAddedLinks.push({ link: link, alias: alias });
 
     this.setState({ AddingLink: false });
   };
 
-  handleRemoveLink = (link: string) => {
-    console.log("removing link " + link);
+  handleRemoveLink = (linkIn: string) => {
+    console.log("removing link " + linkIn);
 
-    localStorage.removeItem(`${LocalStorageKeyPrefix}${link}`);
+    localStorage.removeItem(`${LocalStorageKeyPrefix}${linkIn}`);
+    localStorage.removeItem(`${LocalStorageKeyPrefix}${linkIn}_alias`);
     this.userAddedLinks = this.userAddedLinks.filter(
-      (value: string, index: number, arr: string[]) => {
-        return value !== link;
+      (value: { link: string; alias?: string }) => {
+        console.log("value.link: " + value.link + "; link: " + linkIn);
+        return value.link !== linkIn;
       }
     );
 
@@ -124,7 +133,12 @@ class App extends PureComponent<AppProps, AppState> {
           <LinkGrid toggleRegen={this.state.RegeneratingLink}>
             {this.userAddedLinks.map((link) => {
               return (
-                <LinkGridItem key={link} onLinkRemove={this.handleRemoveLink}>
+                <LinkGridItem
+                  key={link.link.toString()}
+                  link={link.link.toString()}
+                  alias={link.alias?.toString()}
+                  onLinkRemove={this.handleRemoveLink}
+                >
                   {link}
                 </LinkGridItem>
               );

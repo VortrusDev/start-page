@@ -2,6 +2,8 @@ import { PureComponent } from "react";
 
 interface LinkGridItemProps {
   onLinkRemove: (link: string) => void;
+  link: string;
+  alias?: string;
 }
 
 interface LinkGridItemState {}
@@ -11,24 +13,27 @@ export class LinkGridItem extends PureComponent<
   LinkGridItemState
 > {
   render() {
-    console.log(this.props.children);
+    console.log("LINK: ");
+    console.log(this.props.link);
     return (
       <>
         <form
-          action={this.props.children?.toString()}
+          action={this.props.link?.toString()}
           target="_blank"
-          id={`${this.props.children?.toString()}form`}
+          id={`${this.props.link.toString()}form`}
         >
           <button
             className="LinkGridItem"
-            form={`${this.props.children?.toString()}form`}
+            form={`${this.props.link.toString()}form`}
           >
-            {this.props.children?.toString().replace("https://", "")}
+            {this.props.alias
+              ? this.props.alias?.toString()
+              : this.props.link.toString()}
           </button>
           <button
             onClick={(event: any) => {
               event.preventDefault();
-              this.props.onLinkRemove(this.props.children!.toString());
+              this.props.onLinkRemove(this.props.link!.toString());
             }}
           >
             Remove Link
