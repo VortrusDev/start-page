@@ -4,6 +4,7 @@ import { getCurrentMoonPhase } from "./helpers";
 import { AddLinkModal } from "./components/AddLinkModal";
 import { NavBar } from "./components/NavBar";
 import { LinkGrid } from "./components/LinkGrid";
+import { Canvas } from "./components/Canvas";
 import "bootstrap";
 import "./App.css";
 import "./NavBar.css";
@@ -102,6 +103,7 @@ class App extends PureComponent<AppProps, AppState> {
   render() {
     return (
       <div className="App">
+        <Canvas id="Canvas" />
         <NavBar onClickAddLink={this.handleAddLinkPopup} className="NavBar" />
         <header className="App-header">
           <h1>Hello and welcome!</h1>
