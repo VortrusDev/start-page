@@ -114,7 +114,7 @@ class App extends PureComponent<AppProps, AppState> {
             <em>{getCurrentMoonPhase().details}</em>
           </p>
           <form action="https://www.google.com/search?" id="Search-form">
-            <div>
+            <div style={{ height: "10vh" }}>
               <input
                 id="Search-bar"
                 type="text"

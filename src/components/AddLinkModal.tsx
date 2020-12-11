@@ -66,7 +66,7 @@ export class AddLinkModal extends PureComponent<
             className="Popup btn btn-outline-dark btn-rounded waves-effect active"
             onClick={(event: any) => event.stopPropagation()}
           >
-            <h3>Add a link</h3>
+            <h1>Add a link</h1>
             <form
               id="Add-link-form"
               onSubmit={(event) => {
@@ -74,22 +74,38 @@ export class AddLinkModal extends PureComponent<
                 this.handleAddLink();
               }}
             >
-              <p>Link: </p>
+              <h2>Link: </h2>
               <input
                 type="text"
                 value={this.state.link}
                 onChange={this.handleLinkChange}
                 form="Add-link-form"
                 autoFocus
+                style={{ height: "8vh", width: "100%", fontSize: "5vh" }}
               ></input>
-              <p>Alias: </p>
-              <input
-                type="text"
-                value={this.state.alias}
-                onChange={this.handleAliasChange}
-                form="Add-link-form"
-              ></input>
-              <button form="Add-link-form">Add Link</button>
+              <h2>Alias: </h2>
+              <div
+                style={{
+                  height: "8vh",
+                  fontSize: "5vh",
+                  marginBottom: "5vh",
+                }}
+              >
+                <input
+                  type="text"
+                  value={this.state.alias}
+                  onChange={this.handleAliasChange}
+                  form="Add-link-form"
+                  style={{ height: "100%" }}
+                ></input>
+                <button
+                  form="Add-link-form"
+                  className="btn btn-outline-primary btn-rounded waves-effect"
+                  style={{ height: "100%", verticalAlign: "top" }}
+                >
+                  Add Link
+                </button>
+              </div>
             </form>
           </div>
         </div>

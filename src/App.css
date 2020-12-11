@@ -29,9 +29,12 @@
 
 #Search-button {
   font-size: 1.3em;
+  height: 100%;
+  vertical-align: top;
 }
 
 .SearchBar {
+  font-size: 2em;
   margin: auto;
   height: 100%;
 }
