@@ -5,10 +5,16 @@
 }
 
 .LinkGridItem {
-  padding: 20px;
   font-size: 1.75vw;
-  width: 20vw;
-  height: 7.5vw;
   text-align: center;
-  background-color: darkslategrey;
+  cursor: pointer;
+}
+
+.LinkGridItemRemoveButton {
+  display: block;
+  margin: auto;
+}
+
+.LinkGridItemWithButton {
+  padding: 5vw;
 }

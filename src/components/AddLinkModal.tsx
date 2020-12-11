@@ -56,7 +56,7 @@ export class AddLinkModal extends PureComponent<
         onClick={this.handleClose}
       >
         <div
-          className="Popup"
+          className="Popup btn btn-outline-dark btn-rounded waves-effect active"
           onClick={(event: any) => event.stopPropagation()}
         >
           <h3>Add a link</h3>
@@ -73,6 +73,7 @@ export class AddLinkModal extends PureComponent<
               value={this.state.link}
               onChange={this.handleLinkChange}
               form="Add-link-form"
+              autoFocus
             ></input>
             <p>Alias: </p>
             <input

@@ -18,26 +18,36 @@ export class LinkGridItem extends PureComponent<
     return (
       <>
         <form
-          action={this.props.link?.toString()}
+          action={this.props.link.toString()}
           target="_blank"
           id={`${this.props.link.toString()}form`}
         >
-          <button
-            className="LinkGridItem"
-            form={`${this.props.link.toString()}form`}
+          <div
+            className="LinkGridItem btn btn-outline-primary btn-rounded waves-effect"
+            onClick={() =>
+              (document.getElementById(
+                `${this.props.link.toString()}form`
+              ) as HTMLFormElement).submit()
+            }
+            title={this.props.link}
+            role="button"
           >
-            {this.props.alias
-              ? this.props.alias?.toString()
-              : this.props.link.toString()}
-          </button>
-          <button
-            onClick={(event: any) => {
-              event.preventDefault();
-              this.props.onLinkRemove(this.props.link!.toString());
-            }}
-          >
-            Remove Link
-          </button>
+            <div>
+              {this.props.alias
+                ? this.props.alias?.toString()
+                : this.props.link.toString()}
+            </div>
+            <button
+              className="LinkGridItemRemoveButton btn btn-danger btn-rounded"
+              onClick={(event: any) => {
+                event.preventDefault();
+                event.stopPropagation();
+                this.props.onLinkRemove(this.props.link!.toString());
+              }}
+            >
+              Remove Link
+            </button>
+          </div>
         </form>
       </>
     );

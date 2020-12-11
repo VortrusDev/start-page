@@ -29,9 +29,19 @@
 
 #Search-button {
   font-size: 1.3em;
-  background-color: #8611cf;
+}
+
+.SearchBar {
+  margin: auto;
+  height: 100%;
 }
 
 .Text-highlight {
   color: #8611cf;
+}
+
+h1,
+h2,
+p {
+  font-family: "Alegreya", "serif";
 }

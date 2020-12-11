@@ -114,15 +114,23 @@ class App extends PureComponent<AppProps, AppState> {
             <em>{getCurrentMoonPhase().details}</em>
           </p>
           <form action="https://www.google.com/search?" id="Search-form">
-            <input
-              id="Search-bar"
-              type="text"
-              name="q"
-              placeholder="Search..."
-            />
-            <button form="Search-form" id="Search-button">
-              Search
-            </button>
+            <div>
+              <input
+                id="Search-bar"
+                type="text"
+                name="q"
+                placeholder="Search..."
+                className="SearchBar"
+                autoFocus
+              />
+              <button
+                form="Search-form"
+                id="Search-button"
+                className="btn btn-outline-primary btn-rounded waves-effect"
+              >
+                Search
+              </button>
+            </div>
           </form>
           {this.state.AddingLink && (
             <AddLinkModal
