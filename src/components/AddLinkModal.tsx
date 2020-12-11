@@ -47,43 +47,51 @@ export class AddLinkModal extends PureComponent<
   render() {
     return (
       <div
+        onClick={this.handleClose}
         style={{
           zIndex: 0,
+          position: "fixed",
           width: "100vw",
           height: "100vh",
-          position: "fixed",
         }}
-        onClick={this.handleClose}
       >
         <div
-          className="Popup btn btn-outline-dark btn-rounded waves-effect active"
-          onClick={(event: any) => event.stopPropagation()}
+          style={{
+            margin: "auto",
+            display: "flex",
+            justifyContent: "center",
+          }}
         >
-          <h3>Add a link</h3>
-          <form
-            id="Add-link-form"
-            onSubmit={(event) => {
-              event.preventDefault();
-              this.handleAddLink();
-            }}
+          <div
+            className="Popup btn btn-outline-dark btn-rounded waves-effect active"
+            onClick={(event: any) => event.stopPropagation()}
           >
-            <p>Link: </p>
-            <input
-              type="text"
-              value={this.state.link}
-              onChange={this.handleLinkChange}
-              form="Add-link-form"
-              autoFocus
-            ></input>
-            <p>Alias: </p>
-            <input
-              type="text"
-              value={this.state.alias}
-              onChange={this.handleAliasChange}
-              form="Add-link-form"
-            ></input>
-            <button form="Add-link-form">Add Link</button>
-          </form>
+            <h3>Add a link</h3>
+            <form
+              id="Add-link-form"
+              onSubmit={(event) => {
+                event.preventDefault();
+                this.handleAddLink();
+              }}
+            >
+              <p>Link: </p>
+              <input
+                type="text"
+                value={this.state.link}
+                onChange={this.handleLinkChange}
+                form="Add-link-form"
+                autoFocus
+              ></input>
+              <p>Alias: </p>
+              <input
+                type="text"
+                value={this.state.alias}
+                onChange={this.handleAliasChange}
+                form="Add-link-form"
+              ></input>
+              <button form="Add-link-form">Add Link</button>
+            </form>
+          </div>
         </div>
       </div>
     );
