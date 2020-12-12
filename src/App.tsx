@@ -103,58 +103,67 @@ class App extends PureComponent<AppProps, AppState> {
   render() {
     return (
       <div className="App">
-        <Canvas id="Canvas" />
-        <NavBar onClickAddLink={this.handleAddLinkPopup} className="NavBar" />
-        <header className="App-header">
-          <h1>Hello and welcome!</h1>
-          <h2 className="App-description">
-            The moon is currently in{" "}
-            <div className="Text-highlight">{getCurrentMoonPhase().name}</div>
-          </h2>
+        <Canvas
+          id="Canvas"
+          onCanvasDraw={(canvas: HTMLCanvasElement) => {
+            document.body.style.background = `url(${canvas.toDataURL()})`;
+            document.body.style.backgroundRepeat = "no-repeat";
+            document.body.style.backgroundAttachment = "fixed";
+          }}
+        />
+        <div style={{ zIndex: 3 }}>
+          <NavBar onClickAddLink={this.handleAddLinkPopup} className="NavBar" />
+          <header className="App-header">
+            <h1>Hello and welcome!</h1>
+            <h2 className="App-description">
+              The moon is currently in{" "}
+              <div className="Text-highlight">{getCurrentMoonPhase().name}</div>
+            </h2>
 
-          <p>
-            <em>{getCurrentMoonPhase().details}</em>
-          </p>
-          <form action="https://www.google.com/search?" id="Search-form">
-            <div style={{ height: "10vh" }}>
-              <input
-                id="Search-bar"
-                type="text"
-                name="q"
-                placeholder="Search..."
-                className="SearchBar"
-                autoFocus
-              />
-              <button
-                form="Search-form"
-                id="Search-button"
-                className="btn btn-outline-primary btn-rounded waves-effect"
-              >
-                Search
-              </button>
-            </div>
-          </form>
-          {this.state.AddingLink && (
-            <AddLinkModal
-              onAddLink={this.handleAddLink}
-              onClose={this.toggleAddingLinkPopup}
-            />
-          )}
-          <LinkGrid toggleRegen={this.state.RegeneratingLink}>
-            {this.userAddedLinks.map((link) => {
-              return (
-                <LinkGridItem
-                  key={link.link.toString()}
-                  link={link.link.toString()}
-                  alias={link.alias?.toString()}
-                  onLinkRemove={this.handleRemoveLink}
+            <p>
+              <em>{getCurrentMoonPhase().details}</em>
+            </p>
+            <form action="https://www.google.com/search?" id="Search-form">
+              <div style={{ height: "10vh" }}>
+                <input
+                  id="Search-bar"
+                  type="text"
+                  name="q"
+                  placeholder="Search..."
+                  className="SearchBar"
+                  autoFocus
+                />
+                <button
+                  form="Search-form"
+                  id="Search-button"
+                  className="btn btn-outline-primary btn-rounded waves-effect"
                 >
-                  {link}
-                </LinkGridItem>
-              );
-            })}
-          </LinkGrid>
-        </header>
+                  Search
+                </button>
+              </div>
+            </form>
+            {this.state.AddingLink && (
+              <AddLinkModal
+                onAddLink={this.handleAddLink}
+                onClose={this.toggleAddingLinkPopup}
+              />
+            )}
+            <LinkGrid toggleRegen={this.state.RegeneratingLink}>
+              {this.userAddedLinks.map((link) => {
+                return (
+                  <LinkGridItem
+                    key={link.link.toString()}
+                    link={link.link.toString()}
+                    alias={link.alias?.toString()}
+                    onLinkRemove={this.handleRemoveLink}
+                  >
+                    {link}
+                  </LinkGridItem>
+                );
+              })}
+            </LinkGrid>
+          </header>
+        </div>
       </div>
     );
   }
