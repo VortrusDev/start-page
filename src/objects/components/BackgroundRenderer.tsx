@@ -11,13 +11,13 @@ export class BackgroundRenderer extends GenericRenderer {
   }
   render = () => {
     super.render();
-    this.changeColor(this.environmentManager.gbValues);
+    this.changeColor(this.environmentManager.backgroundValues);
     this.ctx!.fillRect(
       0,
       0,
       this.canvasInstance.width,
       this.canvasInstance.height
     );
-    this.changeColor(this.environmentManager.gbValues);
+    this.changeColor(this.environmentManager.backgroundValues);
   };
 }

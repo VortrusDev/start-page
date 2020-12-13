@@ -8,15 +8,17 @@ import { BackgroundRenderer } from "./components/BackgroundRenderer";
 import { GenericRenderer } from "./components/GenericRenderer";
 import { CloudRenderer } from "./components/CloudRenderer";
 import { CircleRenderer } from "./components/CircleRenderer";
+import { EnvironmentManager } from "../EnvironmentManager";
 
 export class SimObject {
   position: Vec2 = new Vec2();
   scale: Vec2 = new Vec2();
   components: Component[] = []; // unlike Unity, I'll just leave this exposed
-  manager: ObjectManager; // Manages everything about the object
-
+  objectManager: ObjectManager; // Manages everything about the object
+  environmentManager: EnvironmentManager; // Manages everything about the environment
   constructor(
-    manager: ObjectManager,
+    objectManager: ObjectManager,
+    environmentManager: EnvironmentManager,
     initialPosition?: Vec2,
     initialScale?: Vec2
   ) {
@@ -28,7 +30,8 @@ export class SimObject {
       this.scale = initialScale;
     }
 
-    this.manager = manager;
+    this.objectManager = objectManager;
+    this.environmentManager = environmentManager;
   }
 
   addComponent = (component: Component): Component => {
@@ -40,7 +43,7 @@ export class SimObject {
       component instanceof CloudRenderer ||
       component instanceof CircleRenderer
     ) {
-      this.manager.RendererList.push(component);
+      this.objectManager.RendererList.push(component);
     }
 
     return this.components[this.components.length - 1]; // Returning the simobject to allow chaining when making objects

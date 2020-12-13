@@ -1,6 +1,8 @@
 // Manages everything related to the environment such as wind speed, etc
 
-const dayNightCycleMinutes = 20; // 20 mins for a full day night cycle
+export const dayNightCycleMinutes = 5; // 20 mins for a full day night cycle
+const bias = 1; // multiplied with the input of the day/night cycle thing to make
+// days longer
 
 export enum EnvironmentModes {
   TimeBased, // The environment manager will change day / night cycle and weather cycle
@@ -8,13 +10,16 @@ export enum EnvironmentModes {
 }
 
 export class EnvironmentManager {
-  windSpeed: number = 1;
-  gbValues: string = ""; // Green blue values for the sky
+  windSpeed: number = 1; // negative or positive based on the type of weather
+  backgroundValues: string = ""; // Green blue values for the sky
+  r: number = 0;
+  g: number = 0;
+  b: number = 0;
   constructor(mode: EnvironmentModes) {
     requestAnimationFrame(this.determineTimeOfDay);
   }
 
-  determineTimeOfDay = () => {
+  determineTimeOfDay() {
     // / 1000 = secs / 60 = mins % 20 = what I want
 
     // 0 = midnight, 20 = midnight, 10 is noon
@@ -29,13 +34,19 @@ export class EnvironmentManager {
     let minsForCurrentCycle = (Date.now() / 1000 / 60) % dayNightCycleMinutes;
     console.log(minsForCurrentCycle);
     if (minsForCurrentCycle <= 10) {
-      let val = minsForCurrentCycle / (10 / 255);
-      this.gbValues = `rgb(0, ${val}, ${val})`;
+      let val = (minsForCurrentCycle / (10 / 255)) * bias;
+      this.r = 0;
+      this.g = val;
+      this.b = val;
+      this.backgroundValues = `rgb(0, ${val * bias}, ${val * bias})`;
     } else {
       let val = 255 - (minsForCurrentCycle - 10) / (10 / 255);
-      this.gbValues = `rgb(0, ${val}, ${val})`;
+      this.r = 0;
+      this.g = val;
+      this.b = val;
+      this.backgroundValues = `rgb(0, ${val * bias}, ${val * bias})`;
     }
 
     requestAnimationFrame(this.determineTimeOfDay);
-  };
+  }
 }

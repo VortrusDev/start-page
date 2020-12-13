@@ -1,5 +1,6 @@
 // The grass objects in the background
 
+import { EnvironmentManager } from "../EnvironmentManager";
 import { ObjectManager } from "../ObjectManager";
 import { CircleRenderer } from "./components/CircleRenderer";
 import { SimObject } from "./SimObject";
@@ -12,9 +13,10 @@ export class BackgroundGrass extends SimObject {
     manager: ObjectManager,
     initialPosition: Vec2,
     initialScale: Vec2,
+    environmentManager: EnvironmentManager,
     color?: string
   ) {
-    super(manager, initialPosition);
+    super(manager, environmentManager, initialPosition);
     this.addComponent(
       new CircleRenderer(
         this,

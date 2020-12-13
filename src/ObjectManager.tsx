@@ -5,6 +5,7 @@ import { SimObject } from "./objects/SimObject";
 import { CanvasId, cullingDeadzone, deadzone } from "./helpers";
 import { Vec2 } from "./objects/Vector";
 import { GenericRenderer } from "./objects/components/GenericRenderer";
+import { EnvironmentManager, EnvironmentModes } from "./EnvironmentManager";
 
 // Also it runs all render functions and sets the background correctly so that
 // there isn't flicker
@@ -14,10 +15,13 @@ export class ObjectManager {
   ObjectList: SimObject[] = [];
   RendererList: Renderer[] = [];
   timeElapsedSinceLastUpdate: number = 0;
-  constructor() {
+  environmentManager: EnvironmentManager;
+  constructor(environmentManager: EnvironmentManager) {
     this.canvasInstance = document.getElementById(
       CanvasId
     ) as HTMLCanvasElement;
+
+    this.environmentManager = environmentManager;
 
     requestAnimationFrame(this.renderAll);
     requestAnimationFrame(this.updateAll);
@@ -25,7 +29,7 @@ export class ObjectManager {
 
   // Creates a blank object
   createObject = (initialPosition?: Vec2): SimObject => {
-    let obj = new SimObject(this, initialPosition);
+    let obj = new SimObject(this, this.environmentManager, initialPosition);
 
     this.ObjectList.push(obj);
 

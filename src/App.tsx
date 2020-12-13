@@ -49,10 +49,10 @@ class App extends PureComponent<AppProps, AppState> {
     };
 
     this.loadLocalStorageKeys();
-    this.objectManager = new ObjectManager();
     this.environmentManager = new EnvironmentManager(
       EnvironmentModes.TimeBased
     );
+    this.objectManager = new ObjectManager(this.environmentManager);
 
     this.setUpCanvas();
 
@@ -60,8 +60,16 @@ class App extends PureComponent<AppProps, AppState> {
   }
 
   setUpEnvironment = () => {
-    let cloudParticleSystem = new SimObject(this.objectManager, new Vec2()),
-      rainParticleSystem = new SimObject(this.objectManager, new Vec2());
+    let cloudParticleSystem = new SimObject(
+        this.objectManager,
+        this.environmentManager,
+        new Vec2()
+      ),
+      rainParticleSystem = new SimObject(
+        this.objectManager,
+        this.environmentManager,
+        new Vec2()
+      );
 
     cloudParticleSystem.addComponent(
       new ParticleSystem(
@@ -93,6 +101,7 @@ class App extends PureComponent<AppProps, AppState> {
         this.objectManager,
         new Vec2(500, 1000),
         new Vec2(550, 550),
+        this.environmentManager,
         "darkgreen"
       )
     );
@@ -102,6 +111,7 @@ class App extends PureComponent<AppProps, AppState> {
         this.objectManager,
         new Vec2(1000, 1000),
         new Vec2(550, 550),
+        this.environmentManager,
         "green"
       )
     );

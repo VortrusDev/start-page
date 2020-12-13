@@ -46,7 +46,7 @@ export class ParticleSystem implements Component {
   }
   update() {
     if (this.disabled) return;
-    this.timeSinceLastSpawn += this.root.manager.timeElapsedSinceLastUpdate;
+    this.timeSinceLastSpawn += this.root.objectManager.timeElapsedSinceLastUpdate;
     if (this.timeSinceLastSpawn >= this.spawnTime) {
       this.spawn();
     }
@@ -55,9 +55,10 @@ export class ParticleSystem implements Component {
   spawn() {
     if (this.disabled) return;
 
-    this.root.manager.addObject(
+    this.root.objectManager.addObject(
       new this.spawnObject(
-        this.root.manager,
+        this.root.objectManager,
+        this.root.environmentManager,
         new Vec2(
           Math.random() * (this.boundingBox.xMax - this.boundingBox.xMin + 1) +
             this.boundingBox.xMin,
