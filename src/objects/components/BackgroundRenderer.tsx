@@ -1,37 +1,9 @@
 // Renders backgrounds in general - the color in the background, not necessarily the objects
-import { Renderer } from "./Renderer";
-import { CanvasId } from "../../helpers";
+import { GenericRenderer } from "./GenericRenderer";
 
-export class BackgroundRenderer implements Renderer {
-  canvasInstance: any = null;
-  ctx: any = null;
-
-  constructor() {
-    this.start();
-  }
-
-  start = () => {
-    this.canvasInstance = document.getElementById(CanvasId);
-  };
+export class BackgroundRenderer extends GenericRenderer {
   render = () => {
-    console.log("Running render from bgRenderer");
-    if (this.canvasInstance == null) {
-      let el = document.getElementById(CanvasId);
-      if (el == null) {
-        return;
-      }
-      this.canvasInstance = el;
-    }
-
-    if (this.ctx == null) {
-      let ctx = this.canvasInstance.getContext("2d");
-      if (ctx == null) {
-        return;
-      }
-      this.ctx = ctx;
-    }
-
-    // Now draw!
+    super.render();
     this.ctx.fillStyle = "cyan";
     this.ctx.fillRect(
       0,
