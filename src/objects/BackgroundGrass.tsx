@@ -15,7 +15,7 @@ export class BackgroundGrass extends SimObject {
   ) {
     super(manager, initialPosition);
     this.addComponent(
-      new CircleRenderer(this, initialPosition, initialScale.x, "green")
+      new CircleRenderer(this, initialPosition, initialScale.x, "green", 1)
     ) as CircleRenderer;
   }
 }

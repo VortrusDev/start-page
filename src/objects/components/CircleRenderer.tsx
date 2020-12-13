@@ -15,6 +15,7 @@ export class CircleRenderer extends GenericRenderer {
     position: Vec2,
     radius: number,
     color: string,
+    zIndex: number,
     stroke?: boolean,
     strokeWidth?: number
   ) {
@@ -24,6 +25,7 @@ export class CircleRenderer extends GenericRenderer {
     this.color = color;
     this.stroke = stroke;
     this.strokeWidth = strokeWidth;
+    this.zIndex = zIndex;
   }
 
   render() {

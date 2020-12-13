@@ -38,7 +38,7 @@ export class GenericRenderer implements Renderer {
   canvasInstance: any = null;
   ctx: CanvasRenderingContext2D | null = null;
   root: SimObject;
-
+  zIndex: number = 0;
   constructor(root: SimObject) {
     this.start();
     this.root = root;

@@ -4,6 +4,7 @@ import { Renderer } from "./objects/components/Renderer";
 import { SimObject } from "./objects/SimObject";
 import { CanvasId, cullingDeadzone, deadzone } from "./helpers";
 import { Vec2 } from "./objects/Vector";
+import { GenericRenderer } from "./objects/components/GenericRenderer";
 
 // Also it runs all render functions and sets the background correctly so that
 // there isn't flicker
@@ -93,6 +94,10 @@ export class ObjectManager {
     // Rendering clouds last so they're drawn over the grass, so we need an index
     // so that we can render them in order by manipulating the rendererlist
 
+    this.RendererList.sort((a, b) => {
+      return (a as GenericRenderer).zIndex - (b as GenericRenderer).zIndex;
+    });
+
     this.RendererList.forEach((renderer) => {
       if (
         renderer.root.position.x > -cullingDeadzone &&
@@ -101,12 +106,9 @@ export class ObjectManager {
         renderer.root.position.y > -cullingDeadzone &&
         renderer.root.position.y < this.canvasInstance!.height + cullingDeadzone
       ) {
-        console.log("rendering ", renderer.root);
         renderer.render();
       }
     });
-
-    console.log("_________________________________");
 
     this.drawCanvasToBackground();
     requestAnimationFrame(this.renderAll);
