@@ -4,12 +4,13 @@ import { GenericRenderer } from "./GenericRenderer";
 export class BackgroundRenderer extends GenericRenderer {
   render = () => {
     super.render();
-    this.ctx.fillStyle = "cyan";
-    this.ctx.fillRect(
+    this.changeColor("red");
+    this.ctx!.fillRect(
       0,
       0,
       this.canvasInstance.width,
       this.canvasInstance.height
     );
+    this.changeColor("cyan");
   };
 }
