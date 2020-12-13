@@ -51,6 +51,10 @@ class App extends PureComponent<AppProps, AppState> {
 
     this.setUpCanvas();
 
+    this.setUpEnvironment();
+  }
+
+  setUpEnvironment = () => {
     let cloudParticleSystem = new SimObject(this.objectManager, new Vec2()),
       rainParticleSystem = new SimObject(this.objectManager, new Vec2());
 
@@ -79,14 +83,14 @@ class App extends PureComponent<AppProps, AppState> {
     this.objectManager.addObject(cloudParticleSystem);
     this.objectManager.addObject(rainParticleSystem);
 
-    let bg1 = new BackgroundGrass(
-      this.objectManager,
-      new Vec2(500, 500),
-      new Vec2(50, 50)
+    this.objectManager.addObject(
+      new BackgroundGrass(
+        this.objectManager,
+        new Vec2(500, 1000),
+        new Vec2(550, 550)
+      )
     );
-
-    this.objectManager.addObject(bg1);
-  }
+  };
 
   setUpCanvas = () => {
     let backgroundObject = this.objectManager.createObject();
