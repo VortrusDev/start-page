@@ -3,6 +3,8 @@
 
 export const CanvasId = "Canvas";
 
+export const cullingDeadzone = 500; // 500px in any direction will not cull objects from render
+
 const Phases: Array<{ name: string; details: string }> = [
   {
     name: "new moon",

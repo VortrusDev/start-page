@@ -55,8 +55,8 @@ class App extends PureComponent<AppProps, AppState> {
     cloudParticleSystem.addComponent(
       new ParticleSystem(
         cloudParticleSystem,
-        { xMin: 0, xMax: 0, yMin: 0, yMax: 500 },
-        5,
+        { xMin: -300, xMax: -200, yMin: 0, yMax: 500 },
+        0.5,
         ParticleSystemStartModes.Immediate,
         Cloud
       )

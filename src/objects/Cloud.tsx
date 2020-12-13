@@ -2,10 +2,6 @@
 
 import { ObjectManager } from "../ObjectManager";
 import { CloudRenderer } from "./components/CloudRenderer";
-import {
-  ParticleSystem,
-  ParticleSystemStartModes,
-} from "./components/ParticleSystem";
 import { Rigidbody } from "./components/Rigidbody";
 import { SimObject } from "./SimObject";
 import { Vec2 } from "./Vector";

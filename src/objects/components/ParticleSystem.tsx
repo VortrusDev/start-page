@@ -1,7 +1,5 @@
 // A particle system. Can render any SimObject as a particle
 
-import { textSpanIntersectsWithPosition } from "typescript";
-import { ObjectManager } from "../../ObjectManager";
 import { SimObject } from "../SimObject";
 import { Vec2 } from "../Vector";
 import { Component } from "./Component";
@@ -52,7 +50,6 @@ export class ParticleSystem implements Component {
   }
 
   spawn() {
-    console.log("Spawning");
     // 0, 1
     // multiply by largest x, then
     this.root.manager.addObject(

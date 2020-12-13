@@ -2,7 +2,7 @@
 
 import { Renderer } from "./objects/components/Renderer";
 import { SimObject } from "./objects/SimObject";
-import { CanvasId } from "./helpers";
+import { CanvasId, cullingDeadzone } from "./helpers";
 import { Vec2 } from "./objects/Vector";
 
 // Also it runs all render functions and sets the background correctly so that
@@ -65,7 +65,15 @@ export class ObjectManager {
       ?.clearRect(0, 0, this.canvasInstance.width, this.canvasInstance.height);
 
     this.RendererList.forEach((renderer) => {
-      renderer.render();
+      if (
+        renderer.root.position.x > -cullingDeadzone &&
+        renderer.root.position.x <
+          this.canvasInstance!.width + cullingDeadzone &&
+        renderer.root.position.y > -cullingDeadzone &&
+        renderer.root.position.y < this.canvasInstance!.height + cullingDeadzone
+      ) {
+        renderer.render();
+      }
     });
 
     this.drawCanvasToBackground();
