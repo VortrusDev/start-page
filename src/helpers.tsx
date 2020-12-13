@@ -1,6 +1,8 @@
 // Original Snippet: https://gist.github.com/endel/dfe6bb2fbe679781948c
 // Heavily modified to fit Typescript standards
 
+export const CanvasId = "Canvas";
+
 const Phases: Array<{ name: string; details: string }> = [
   {
     name: "new moon",

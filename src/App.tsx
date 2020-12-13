@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 
-import { getCurrentMoonPhase } from "./helpers";
+import { getCurrentMoonPhase, CanvasId } from "./helpers";
 import { AddLinkModal } from "./components/AddLinkModal";
 import { NavBar } from "./components/NavBar";
 import { LinkGrid } from "./components/LinkGrid";
@@ -11,6 +11,8 @@ import "./NavBar.css";
 import "./Popup.css";
 import "./LinkGrid.css";
 import { LinkGridItem } from "./components/LinkGridItem";
+import { BackgroundRenderer } from "./objects/BackgroundRenderer";
+import { ObjectManager } from "./ObjectManager";
 
 const LocalStorageKeyPrefix = "StartPageLink:";
 
@@ -27,6 +29,7 @@ class App extends PureComponent<AppProps, AppState> {
    */
 
   userAddedLinks: { link: string; alias?: string }[] = [];
+  objectManager: ObjectManager;
 
   constructor(props: any) {
     super(props);
@@ -36,6 +39,10 @@ class App extends PureComponent<AppProps, AppState> {
     };
 
     this.loadLocalStorageKeys();
+    this.objectManager = new ObjectManager();
+
+    let obj = this.objectManager.createObject();
+    obj.addComponent(new BackgroundRenderer());
   }
 
   loadLocalStorageKeys = () => {
@@ -104,7 +111,7 @@ class App extends PureComponent<AppProps, AppState> {
     return (
       <div className="App">
         <Canvas
-          id="Canvas"
+          id={CanvasId}
           onCanvasDraw={(canvas: HTMLCanvasElement) => {
             document.body.style.background = `url(${canvas.toDataURL()})`;
             document.body.style.backgroundRepeat = "no-repeat";
