@@ -45,7 +45,6 @@ export class ParticleSystem implements Component {
     }
   }
   update() {
-    if (this.disabled) console.log("This one's disabled");
     if (this.disabled) return;
     this.timeSinceLastSpawn += this.root.manager.timeElapsedSinceLastUpdate;
     if (this.timeSinceLastSpawn >= this.spawnTime) {

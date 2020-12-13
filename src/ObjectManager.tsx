@@ -90,6 +90,9 @@ export class ObjectManager {
       .getContext("2d")
       ?.clearRect(0, 0, this.canvasInstance.width, this.canvasInstance.height);
 
+    // Rendering clouds last so they're drawn over the grass, so we need an index
+    // so that we can render them in order by manipulating the rendererlist
+
     this.RendererList.forEach((renderer) => {
       if (
         renderer.root.position.x > -cullingDeadzone &&
@@ -98,9 +101,12 @@ export class ObjectManager {
         renderer.root.position.y > -cullingDeadzone &&
         renderer.root.position.y < this.canvasInstance!.height + cullingDeadzone
       ) {
+        console.log("rendering ", renderer.root);
         renderer.render();
       }
     });
+
+    console.log("_________________________________");
 
     this.drawCanvasToBackground();
     requestAnimationFrame(this.renderAll);

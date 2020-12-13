@@ -20,6 +20,7 @@ import {
   ParticleSystem,
   ParticleSystemStartModes,
 } from "./objects/components/ParticleSystem";
+import { BackgroundGrass } from "./objects/BackgroundGrass";
 
 const LocalStorageKeyPrefix = "StartPageLink:";
 
@@ -77,6 +78,14 @@ class App extends PureComponent<AppProps, AppState> {
 
     this.objectManager.addObject(cloudParticleSystem);
     this.objectManager.addObject(rainParticleSystem);
+
+    let bg1 = new BackgroundGrass(
+      this.objectManager,
+      new Vec2(500, 500),
+      new Vec2(50, 50)
+    );
+
+    this.objectManager.addObject(bg1);
   }
 
   setUpCanvas = () => {

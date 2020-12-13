@@ -7,15 +7,25 @@ import { ObjectManager } from "../ObjectManager";
 import { BackgroundRenderer } from "./components/BackgroundRenderer";
 import { GenericRenderer } from "./components/GenericRenderer";
 import { CloudRenderer } from "./components/CloudRenderer";
+import { CircleRenderer } from "./components/CircleRenderer";
 
 export class SimObject {
   position: Vec2 = new Vec2();
+  scale: Vec2 = new Vec2();
   components: Component[] = []; // unlike Unity, I'll just leave this exposed
   manager: ObjectManager; // Manages everything about the object
 
-  constructor(manager: ObjectManager, initialPosition?: Vec2) {
+  constructor(
+    manager: ObjectManager,
+    initialPosition?: Vec2,
+    initialScale?: Vec2
+  ) {
     if (initialPosition) {
       this.position = initialPosition;
+    }
+
+    if (initialScale) {
+      this.scale = initialScale;
     }
 
     this.manager = manager;
@@ -27,7 +37,8 @@ export class SimObject {
     if (
       component instanceof BackgroundRenderer ||
       component instanceof GenericRenderer ||
-      component instanceof CloudRenderer
+      component instanceof CloudRenderer ||
+      component instanceof CircleRenderer
     ) {
       this.manager.RendererList.push(component);
     }
