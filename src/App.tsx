@@ -11,7 +11,7 @@ import "./NavBar.css";
 import "./Popup.css";
 import "./LinkGrid.css";
 import { LinkGridItem } from "./components/LinkGridItem";
-import { BackgroundRenderer } from "./objects/BackgroundRenderer";
+import { BackgroundRenderer } from "./objects/components/BackgroundRenderer";
 import { ObjectManager } from "./ObjectManager";
 
 const LocalStorageKeyPrefix = "StartPageLink:";

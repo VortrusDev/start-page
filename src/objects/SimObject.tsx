@@ -2,9 +2,9 @@
 // Everything rendered to the canvas should extend from this at some point.
 
 import { Vec2 } from "./Vector";
-import { Component } from "./Component";
+import { Component } from "./components/Component";
 import { ObjectManager } from "../ObjectManager";
-import { BackgroundRenderer } from "./BackgroundRenderer";
+import { BackgroundRenderer } from "./components/BackgroundRenderer";
 
 export class SimObject {
   position: Vec2 = new Vec2();

@@ -1,6 +1,6 @@
 // Will manage all SimObjects and their components and keep things in sync
 
-import { Renderer } from "./objects/Renderer";
+import { Renderer } from "./objects/components/Renderer";
 import { SimObject } from "./objects/SimObject";
 import { CanvasId } from "./helpers";
 import { Vec2 } from "./objects/Vector";

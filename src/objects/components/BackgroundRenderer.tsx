@@ -1,6 +1,6 @@
 // Renders backgrounds in general - the color in the background, not necessarily the objects
 import { Renderer } from "./Renderer";
-import { CanvasId } from "../helpers";
+import { CanvasId } from "../../helpers";
 
 export class BackgroundRenderer implements Renderer {
   canvasInstance: any = null;
