@@ -3,6 +3,7 @@
 import { Renderer } from "./Renderer";
 import { CanvasId } from "../../helpers";
 import { Vec2 } from "../Vector";
+import { SimObject } from "../SimObject";
 
 export enum RenderModes {
   sourceOver = "source-over",
@@ -36,9 +37,11 @@ export enum RenderModes {
 export class GenericRenderer implements Renderer {
   canvasInstance: any = null;
   ctx: CanvasRenderingContext2D | null = null;
+  root: SimObject;
 
-  constructor() {
+  constructor(root: SimObject) {
     this.start();
+    this.root = root;
   }
 
   start() {

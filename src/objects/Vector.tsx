@@ -22,3 +22,19 @@ export class Vec2 {
     return new Vec2(difX, difY, difMag);
   };
 }
+
+// Adds two vectors together
+export function AddVectors(vector1: Vec2, vector2: Vec2): Vec2 {
+  const sumX = vector1.x + vector2.x;
+  const sumY = vector1.y + vector2.y;
+  const sumMag = vector1.magnitude + vector2.magnitude;
+  return new Vec2(sumX, sumY, sumMag);
+}
+
+// Subtracts two vectors (arguments are in subtraction order)
+export function SubtractVectors(vectorLarger: Vec2, vectorSmaller: Vec2): Vec2 {
+  const sumX = vectorLarger.x - vectorSmaller.x;
+  const sumY = vectorLarger.y - vectorSmaller.y;
+  const sumMag = vectorLarger.magnitude - vectorSmaller.magnitude;
+  return new Vec2(sumX, sumY, sumMag);
+}

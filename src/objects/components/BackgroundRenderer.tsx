@@ -4,7 +4,7 @@ import { GenericRenderer } from "./GenericRenderer";
 export class BackgroundRenderer extends GenericRenderer {
   render = () => {
     super.render();
-    this.changeColor("red");
+    this.changeColor("cyan");
     this.ctx!.fillRect(
       0,
       0,

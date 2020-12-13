@@ -21,9 +21,17 @@ export class ObjectManager {
     requestAnimationFrame(this.renderAll);
   }
 
+  // Creates a blank object
   createObject = (initialPosition?: Vec2): SimObject => {
     let obj = new SimObject(this, initialPosition);
 
+    this.ObjectList.push(obj);
+
+    return obj;
+  };
+
+  // Adds an object instantiated with new() elsewhere
+  addObject = (obj: SimObject): SimObject => {
     this.ObjectList.push(obj);
 
     return obj;
@@ -38,6 +46,10 @@ export class ObjectManager {
       }
       this.canvasInstance = inst;
     }
+
+    this.canvasInstance
+      .getContext("2d")
+      ?.clearRect(0, 0, this.canvasInstance.width, this.canvasInstance.height);
 
     this.RendererList.forEach((renderer) => {
       renderer.render();

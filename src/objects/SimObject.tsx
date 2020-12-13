@@ -5,6 +5,8 @@ import { Vec2 } from "./Vector";
 import { Component } from "./components/Component";
 import { ObjectManager } from "../ObjectManager";
 import { BackgroundRenderer } from "./components/BackgroundRenderer";
+import { GenericRenderer } from "./components/GenericRenderer";
+import { CloudRenderer } from "./components/CloudRenderer";
 
 export class SimObject {
   position: Vec2 = new Vec2();
@@ -20,8 +22,13 @@ export class SimObject {
   }
 
   addComponent = (component: Component) => {
+    component.root = this;
     this.components.push(component);
-    if (component instanceof BackgroundRenderer) {
+    if (
+      component instanceof BackgroundRenderer ||
+      component instanceof GenericRenderer ||
+      component instanceof CloudRenderer
+    ) {
       this.manager.RendererList.push(component);
     }
   };

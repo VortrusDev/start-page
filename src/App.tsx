@@ -13,6 +13,8 @@ import "./LinkGrid.css";
 import { LinkGridItem } from "./components/LinkGridItem";
 import { BackgroundRenderer } from "./objects/components/BackgroundRenderer";
 import { ObjectManager } from "./ObjectManager";
+import { Cloud } from "./objects/Cloud";
+import { Vec2 } from "./objects/Vector";
 
 const LocalStorageKeyPrefix = "StartPageLink:";
 
@@ -42,10 +44,15 @@ class App extends PureComponent<AppProps, AppState> {
     this.objectManager = new ObjectManager();
 
     this.setUpCanvas();
+
+    this.objectManager.addObject(
+      new Cloud(this.objectManager, new Vec2(100, 100))
+    );
   }
 
   setUpCanvas = () => {
-    this.objectManager.createObject().addComponent(new BackgroundRenderer());
+    let backgroundObject = this.objectManager.createObject();
+    backgroundObject.addComponent(new BackgroundRenderer(backgroundObject));
   };
 
   loadLocalStorageKeys = () => {
