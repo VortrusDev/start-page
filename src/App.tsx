@@ -109,7 +109,9 @@ class App extends PureComponent<AppProps, AppState> {
 
   setUpCanvas = () => {
     let backgroundObject = this.objectManager.createObject();
-    backgroundObject.addComponent(new BackgroundRenderer(backgroundObject));
+    backgroundObject.addComponent(
+      new BackgroundRenderer(backgroundObject, this.environmentManager)
+    );
   };
 
   loadLocalStorageKeys = () => {

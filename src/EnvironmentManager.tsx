@@ -2,8 +2,6 @@
 
 const dayNightCycleMinutes = 20; // 20 mins for a full day night cycle
 
-export let gbValues = ""; // The green blue values for the sky
-
 export enum EnvironmentModes {
   TimeBased, // The environment manager will change day / night cycle and weather cycle
   // based upon the real life time and an algorithm
@@ -11,9 +9,9 @@ export enum EnvironmentModes {
 
 export class EnvironmentManager {
   windSpeed: number = 1;
-
+  gbValues: string = ""; // Green blue values for the sky
   constructor(mode: EnvironmentModes) {
-    this.determineTimeOfDay();
+    requestAnimationFrame(this.determineTimeOfDay);
   }
 
   determineTimeOfDay = () => {
@@ -29,12 +27,15 @@ export class EnvironmentManager {
     // 255 - ((currentVal - 10) / (10 / 255)) if greater than 10
 
     let minsForCurrentCycle = (Date.now() / 1000 / 60) % dayNightCycleMinutes;
+    console.log(minsForCurrentCycle);
     if (minsForCurrentCycle <= 10) {
       let val = minsForCurrentCycle / (10 / 255);
-      gbValues = `rgb(0, ${val}, ${val})`;
+      this.gbValues = `rgb(0, ${val}, ${val})`;
     } else {
       let val = 255 - (minsForCurrentCycle - 10) / (10 / 255);
-      gbValues = `rgb(0, ${val}, ${val})`;
+      this.gbValues = `rgb(0, ${val}, ${val})`;
     }
+
+    requestAnimationFrame(this.determineTimeOfDay);
   };
 }
