@@ -87,7 +87,17 @@ class App extends PureComponent<AppProps, AppState> {
       new BackgroundGrass(
         this.objectManager,
         new Vec2(500, 1000),
-        new Vec2(550, 550)
+        new Vec2(550, 550),
+        "darkgreen"
+      )
+    );
+
+    this.objectManager.addObject(
+      new BackgroundGrass(
+        this.objectManager,
+        new Vec2(1000, 1000),
+        new Vec2(550, 550),
+        "green"
       )
     );
   };
