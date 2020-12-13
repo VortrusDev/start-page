@@ -23,6 +23,7 @@ export class ParticleSystem implements Component {
   mode: ParticleSystemStartModes;
   timeSinceLastSpawn: number = 0;
   spawnObject: typeof SimObject;
+  disabled: boolean = false;
   constructor(
     root: SimObject,
     boundingBox: boundingBox,
@@ -38,11 +39,14 @@ export class ParticleSystem implements Component {
   }
 
   start() {
+    if (this.disabled) return;
     if ((this.mode = ParticleSystemStartModes.Immediate)) {
       this.spawn();
     }
   }
   update() {
+    if (this.disabled) console.log("This one's disabled");
+    if (this.disabled) return;
     this.timeSinceLastSpawn += this.root.manager.timeElapsedSinceLastUpdate;
     if (this.timeSinceLastSpawn >= this.spawnTime) {
       this.spawn();
@@ -50,8 +54,8 @@ export class ParticleSystem implements Component {
   }
 
   spawn() {
-    // 0, 1
-    // multiply by largest x, then
+    if (this.disabled) return;
+
     this.root.manager.addObject(
       new this.spawnObject(
         this.root.manager,

@@ -54,6 +54,7 @@ export class ObjectManager {
   };
 
   updateAll = () => {
+    if (!this.canvasInstance) return;
     this.ObjectList.forEach((obj) => {
       if (
         obj.position.x < -deadzone ||

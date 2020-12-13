@@ -50,7 +50,8 @@ class App extends PureComponent<AppProps, AppState> {
 
     this.setUpCanvas();
 
-    let cloudParticleSystem = new SimObject(this.objectManager, new Vec2());
+    let cloudParticleSystem = new SimObject(this.objectManager, new Vec2()),
+      rainParticleSystem = new SimObject(this.objectManager, new Vec2());
 
     cloudParticleSystem.addComponent(
       new ParticleSystem(
@@ -62,7 +63,20 @@ class App extends PureComponent<AppProps, AppState> {
       )
     );
 
+    let rps = rainParticleSystem.addComponent(
+      new ParticleSystem(
+        rainParticleSystem,
+        { xMin: -300, xMax: -200, yMin: 0, yMax: 500 },
+        0.5,
+        ParticleSystemStartModes.Immediate,
+        Cloud
+      )
+    ) as ParticleSystem;
+
+    rps.disabled = true;
+
     this.objectManager.addObject(cloudParticleSystem);
+    this.objectManager.addObject(rainParticleSystem);
   }
 
   setUpCanvas = () => {
