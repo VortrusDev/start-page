@@ -32,7 +32,7 @@ export class BackgroundRenderer implements Renderer {
     }
 
     // Now draw!
-    this.ctx.fillStyle = "black";
+    this.ctx.fillStyle = "cyan";
     this.ctx.fillRect(
       0,
       0,

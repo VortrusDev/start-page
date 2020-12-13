@@ -4,7 +4,9 @@ interface CanvasProps {
   id: string;
   onCanvasDraw: (canvasInstance: HTMLCanvasElement) => void;
 }
-interface CanvasState {}
+interface CanvasState {
+  adjustingDimensions: boolean;
+}
 
 export class Canvas extends PureComponent<CanvasProps, CanvasState> {
   canvasInstance: HTMLCanvasElement;
@@ -34,10 +36,34 @@ export class Canvas extends PureComponent<CanvasProps, CanvasState> {
 
     this.ctx = this.canvasInstance.getContext("2d");
 
-    setInterval(this.update, 13.33);
+    requestAnimationFrame(this.update);
   }
 
-  update = () => {};
+  update = () => {
+    const oldWidth = this.width,
+      oldHeight = this.height;
+
+    this.width = Math.max(
+      document.documentElement.clientWidth || 0,
+      window.innerWidth || 0
+    );
+    this.height = Math.max(
+      document.documentElement.clientHeight || 0,
+      window.innerHeight || 0
+    );
+
+    if (oldWidth !== this.width || oldHeight !== this.height) {
+      this.setState({ adjustingDimensions: true });
+    } else {
+      if (this.state) {
+        if (this.state.adjustingDimensions !== false) {
+          this.setState({ adjustingDimensions: false });
+        }
+      }
+    }
+
+    requestAnimationFrame(this.update);
+  };
 
   render() {
     return (

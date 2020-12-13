@@ -41,9 +41,12 @@ class App extends PureComponent<AppProps, AppState> {
     this.loadLocalStorageKeys();
     this.objectManager = new ObjectManager();
 
-    let obj = this.objectManager.createObject();
-    obj.addComponent(new BackgroundRenderer());
+    this.setUpCanvas();
   }
+
+  setUpCanvas = () => {
+    this.objectManager.createObject().addComponent(new BackgroundRenderer());
+  };
 
   loadLocalStorageKeys = () => {
     for (let key in localStorage) {
@@ -112,11 +115,7 @@ class App extends PureComponent<AppProps, AppState> {
       <div className="App">
         <Canvas
           id={CanvasId}
-          onCanvasDraw={(canvas: HTMLCanvasElement) => {
-            document.body.style.background = `url(${canvas.toDataURL()})`;
-            document.body.style.backgroundRepeat = "no-repeat";
-            document.body.style.backgroundAttachment = "fixed";
-          }}
+          onCanvasDraw={(canvas: HTMLCanvasElement) => {}}
         />
         <div style={{ zIndex: 3 }}>
           <NavBar onClickAddLink={this.handleAddLinkPopup} className="NavBar" />
