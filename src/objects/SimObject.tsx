@@ -21,7 +21,7 @@ export class SimObject {
     this.manager = manager;
   }
 
-  addComponent = (component: Component) => {
+  addComponent = (component: Component): SimObject => {
     component.root = this;
     this.components.push(component);
     if (
@@ -31,6 +31,8 @@ export class SimObject {
     ) {
       this.manager.RendererList.push(component);
     }
+
+    return this; // Returning the simobject to allow chaining when making objects
   };
 
   start = () => {
@@ -38,4 +40,6 @@ export class SimObject {
       component.start();
     });
   };
+
+  update = () => {};
 }

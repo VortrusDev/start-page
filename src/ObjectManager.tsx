@@ -12,13 +12,14 @@ export class ObjectManager {
   canvasInstance: HTMLCanvasElement | null;
   ObjectList: SimObject[] = [];
   RendererList: Renderer[] = [];
-
+  timeElapsedSinceLastUpdate: number = 0;
   constructor() {
     this.canvasInstance = document.getElementById(
       CanvasId
     ) as HTMLCanvasElement;
 
     requestAnimationFrame(this.renderAll);
+    requestAnimationFrame(this.updateAll);
   }
 
   // Creates a blank object
@@ -35,6 +36,18 @@ export class ObjectManager {
     this.ObjectList.push(obj);
 
     return obj;
+  };
+
+  updateAll = () => {
+    this.ObjectList.forEach((obj) => {
+      obj.components.forEach((component) => {
+        component.update();
+      });
+    });
+
+    const t1 = performance.now();
+    requestAnimationFrame(this.updateAll);
+    this.timeElapsedSinceLastUpdate = performance.now() - t1;
   };
 
   renderAll = () => {

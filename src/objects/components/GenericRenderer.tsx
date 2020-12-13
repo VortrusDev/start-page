@@ -48,6 +48,8 @@ export class GenericRenderer implements Renderer {
     this.canvasInstance = document.getElementById(CanvasId);
   }
 
+  update() {}
+
   drawCircle(
     position: Vec2,
     radius: number,

@@ -15,6 +15,11 @@ import { BackgroundRenderer } from "./objects/components/BackgroundRenderer";
 import { ObjectManager } from "./ObjectManager";
 import { Cloud } from "./objects/Cloud";
 import { Vec2 } from "./objects/Vector";
+import { SimObject } from "./objects/SimObject";
+import {
+  ParticleSystem,
+  ParticleSystemStartModes,
+} from "./objects/components/ParticleSystem";
 
 const LocalStorageKeyPrefix = "StartPageLink:";
 
@@ -45,9 +50,19 @@ class App extends PureComponent<AppProps, AppState> {
 
     this.setUpCanvas();
 
-    this.objectManager.addObject(
-      new Cloud(this.objectManager, new Vec2(100, 100))
+    let cloudParticleSystem = new SimObject(this.objectManager, new Vec2());
+
+    cloudParticleSystem.addComponent(
+      new ParticleSystem(
+        cloudParticleSystem,
+        { xMin: 0, xMax: 0, yMin: 0, yMax: 500 },
+        5,
+        ParticleSystemStartModes.Immediate,
+        Cloud
+      )
     );
+
+    this.objectManager.addObject(cloudParticleSystem);
   }
 
   setUpCanvas = () => {

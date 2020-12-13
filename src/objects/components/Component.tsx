@@ -7,4 +7,5 @@ export interface Component {
   root: SimObject;
   start: () => void; // Do the thing it's intended to do, whether that be render something
   // or interact with the world
+  update: () => void;
 }
