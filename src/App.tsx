@@ -21,6 +21,7 @@ import {
   ParticleSystemStartModes,
 } from "./objects/components/ParticleSystem";
 import { BackgroundGrass } from "./objects/BackgroundGrass";
+import { EnvironmentManager, EnvironmentModes } from "./EnvironmentManager";
 
 const LocalStorageKeyPrefix = "StartPageLink:";
 
@@ -38,6 +39,7 @@ class App extends PureComponent<AppProps, AppState> {
 
   userAddedLinks: { link: string; alias?: string }[] = [];
   objectManager: ObjectManager;
+  environmentManager: EnvironmentManager;
 
   constructor(props: any) {
     super(props);
@@ -48,6 +50,9 @@ class App extends PureComponent<AppProps, AppState> {
 
     this.loadLocalStorageKeys();
     this.objectManager = new ObjectManager();
+    this.environmentManager = new EnvironmentManager(
+      EnvironmentModes.TimeBased
+    );
 
     this.setUpCanvas();
 
