@@ -4,6 +4,8 @@
 export const CanvasId = "Canvas";
 
 export const cullingDeadzone = 500; // 500px in any direction will not cull objects from render
+export const deadzone = 600; // If an object is put beyond this point, it is removed from the
+// simulation
 
 const Phases: Array<{ name: string; details: string }> = [
   {

@@ -2,7 +2,7 @@
 
 import { Renderer } from "./objects/components/Renderer";
 import { SimObject } from "./objects/SimObject";
-import { CanvasId, cullingDeadzone } from "./helpers";
+import { CanvasId, cullingDeadzone, deadzone } from "./helpers";
 import { Vec2 } from "./objects/Vector";
 
 // Also it runs all render functions and sets the background correctly so that
@@ -38,8 +38,33 @@ export class ObjectManager {
     return obj;
   };
 
+  removeObject = (obj: SimObject) => {
+    let index = 0;
+    let arrNum = this.ObjectList.length;
+    this.ObjectList.forEach((object) => {
+      if (obj === object) {
+        this.ObjectList.splice(index, 1);
+      }
+      index++;
+    });
+
+    if (this.ObjectList.length === arrNum) {
+      console.error("Failed to remove object from ObjectList: ", obj);
+    }
+  };
+
   updateAll = () => {
     this.ObjectList.forEach((obj) => {
+      if (
+        obj.position.x < -deadzone ||
+        obj.position.x > this.canvasInstance!.width + deadzone ||
+        obj.position.y < -deadzone ||
+        obj.position.y > this.canvasInstance!.height + deadzone
+      ) {
+        this.removeObject(obj);
+      }
+
+      // If object survives culling, update its components
       obj.components.forEach((component) => {
         component.update();
       });

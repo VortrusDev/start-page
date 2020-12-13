@@ -11,7 +11,7 @@ export class Cloud extends SimObject {
   constructor(manager: ObjectManager, position?: Vec2) {
     super(manager, position);
     this.addComponent(new CloudRenderer(this));
-    this.rigid.constantForce = new Vec2(1, 0);
+    this.rigid.constantForce = new Vec2(3, 0);
     this.addComponent(this.rigid);
   }
 }
