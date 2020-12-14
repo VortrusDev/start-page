@@ -2,7 +2,6 @@ import { PureComponent } from "react";
 
 interface CanvasProps {
   id: string;
-  onCanvasDraw: (canvasInstance: HTMLCanvasElement) => void;
 }
 interface CanvasState {
   adjustingDimensions: boolean;

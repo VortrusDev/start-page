@@ -115,6 +115,16 @@ class App extends PureComponent<AppProps, AppState> {
         "green"
       )
     );
+
+    this.objectManager.addObject(
+      new BackgroundGrass(
+        this.objectManager,
+        new Vec2(0, 1050),
+        new Vec2(550, 550),
+        this.environmentManager,
+        "green"
+      )
+    );
   };
 
   setUpCanvas = () => {
@@ -189,10 +199,7 @@ class App extends PureComponent<AppProps, AppState> {
   render() {
     return (
       <div className="App">
-        <Canvas
-          id={CanvasId}
-          onCanvasDraw={(canvas: HTMLCanvasElement) => {}}
-        />
+        <Canvas id={CanvasId} />
         <div style={{ zIndex: 3 }}>
           <NavBar onClickAddLink={this.handleAddLinkPopup} className="NavBar" />
           <header className="App-header">

@@ -19,7 +19,7 @@ export class EnvironmentManager {
     requestAnimationFrame(this.determineTimeOfDay);
   }
 
-  determineTimeOfDay() {
+  determineTimeOfDay = () => {
     // / 1000 = secs / 60 = mins % 20 = what I want
 
     // 0 = midnight, 20 = midnight, 10 is noon
@@ -48,5 +48,5 @@ export class EnvironmentManager {
     }
 
     requestAnimationFrame(this.determineTimeOfDay);
-  }
+  };
 }
