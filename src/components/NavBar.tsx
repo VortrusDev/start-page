@@ -12,7 +12,7 @@ export class NavBar extends PureComponent<NavBarProps, NavBarState> {
       <header className={this.props.className}>
         <button
           onClick={this.props.onClickAddLink}
-          className="btn btn-outline-primary btn-rounded waves-effect"
+          className="btn btn-lg btn-outline-primary btn-rounded waves-effect"
         >
           Add a Link
         </button>

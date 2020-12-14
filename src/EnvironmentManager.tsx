@@ -33,14 +33,17 @@ export class EnvironmentManager {
 
     let minsForCurrentCycle = (Date.now() / 1000 / 60) % dayNightCycleMinutes;
     console.log(minsForCurrentCycle);
-    if (minsForCurrentCycle <= 10) {
-      let val = (minsForCurrentCycle / (10 / 255)) * bias;
+    if (minsForCurrentCycle <= dayNightCycleMinutes / 2) {
+      let val = (minsForCurrentCycle / (dayNightCycleMinutes / 2 / 255)) * bias;
       this.r = 0;
       this.g = val;
       this.b = val;
       this.backgroundValues = `rgb(0, ${val * bias}, ${val * bias})`;
     } else {
-      let val = 255 - (minsForCurrentCycle - 10) / (10 / 255);
+      let val =
+        255 -
+        (minsForCurrentCycle - dayNightCycleMinutes / 2) /
+          (dayNightCycleMinutes / 2 / 255);
       this.r = 0;
       this.g = val;
       this.b = val;
