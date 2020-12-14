@@ -15,7 +15,12 @@ export class EnvironmentManager {
   r: number = 0;
   g: number = 0;
   b: number = 0;
-  constructor(mode: EnvironmentModes) {
+  textR: number = 0;
+  textG: number = 0;
+  textB: number = 0;
+  textColorCallback: () => void;
+  constructor(mode: EnvironmentModes, textColorCallback: () => void) {
+    this.textColorCallback = textColorCallback;
     requestAnimationFrame(this.determineTimeOfDay);
   }
 
@@ -38,6 +43,9 @@ export class EnvironmentManager {
       this.r = 0;
       this.g = val;
       this.b = val;
+      this.textR = 255 - val;
+      this.textG = 255 - val;
+      this.textB = 255 - val;
       this.backgroundValues = `rgb(0, ${val * bias}, ${val * bias})`;
     } else {
       let val =
@@ -47,8 +55,13 @@ export class EnvironmentManager {
       this.r = 0;
       this.g = val;
       this.b = val;
+      this.textR = 255 - val;
+      this.textG = 255 - val;
+      this.textB = 255 - val;
       this.backgroundValues = `rgb(0, ${val * bias}, ${val * bias})`;
     }
+
+    this.textColorCallback();
 
     requestAnimationFrame(this.determineTimeOfDay);
   };

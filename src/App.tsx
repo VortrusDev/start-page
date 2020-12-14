@@ -30,6 +30,7 @@ interface AppProps {}
 interface AppState {
   AddingLink: boolean; // Is the user adding a link? Yes if true
   RegeneratingLink: boolean;
+  TextColorChange: [number, number, number];
 }
 
 class App extends PureComponent<AppProps, AppState> {
@@ -46,11 +47,20 @@ class App extends PureComponent<AppProps, AppState> {
     this.state = {
       AddingLink: false,
       RegeneratingLink: false,
+      TextColorChange: [0, 0, 0],
     };
 
     this.loadLocalStorageKeys();
     this.environmentManager = new EnvironmentManager(
-      EnvironmentModes.TimeBased
+      EnvironmentModes.TimeBased,
+      () =>
+        this.setState({
+          TextColorChange: [
+            this.environmentManager.textR,
+            this.environmentManager.textG,
+            this.environmentManager.textB,
+          ],
+        })
     );
     this.objectManager = new ObjectManager(this.environmentManager);
 
@@ -203,15 +213,37 @@ class App extends PureComponent<AppProps, AppState> {
         <div style={{ zIndex: 3 }}>
           <NavBar onClickAddLink={this.handleAddLinkPopup} className="NavBar" />
           <header className="App-header">
-            <h1>Hello and welcome!</h1>
-            <h2 className="App-description">
-              The moon is currently in{" "}
-              <div className="Text-highlight">{getCurrentMoonPhase().name}</div>
-            </h2>
-
-            <p>
-              <em>{getCurrentMoonPhase().details}</em>
-            </p>
+            {this.state.TextColorChange && (
+              <>
+                {" "}
+                <h1
+                  style={{
+                    color: `rgb(${this.environmentManager.textR},${this.environmentManager.textG},${this.environmentManager.textB})`,
+                    textShadow: `2px 2px 2px #DD00FF`,
+                  }}
+                >
+                  Hello and welcome!
+                </h1>
+                <h2
+                  className="App-description"
+                  style={{
+                    color: `rgb(${this.environmentManager.textR},${this.environmentManager.textG},${this.environmentManager.textB})`,
+                  }}
+                >
+                  The moon is currently in{" "}
+                  <div className="Text-highlight">
+                    {getCurrentMoonPhase().name}
+                  </div>
+                </h2>
+                <p
+                  style={{
+                    color: `rgb(${this.environmentManager.textR},${this.environmentManager.textG},${this.environmentManager.textB})`,
+                  }}
+                >
+                  <em>{getCurrentMoonPhase().details}</em>
+                </p>
+              </>
+            )}
             <form action="https://www.google.com/search?" id="Search-form">
               <div style={{ height: "10vh" }}>
                 <input
