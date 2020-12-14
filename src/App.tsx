@@ -85,7 +85,7 @@ class App extends PureComponent<AppProps, AppState> {
       new ParticleSystem(
         rainParticleSystem,
         { xMin: -300, xMax: -200, yMin: 0, yMax: 500 },
-        0.5,
+        3,
         ParticleSystemStartModes.Immediate,
         Cloud
       )

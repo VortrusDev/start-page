@@ -10,7 +10,7 @@ export enum EnvironmentModes {
 }
 
 export class EnvironmentManager {
-  windSpeed: number = 1; // negative or positive based on the type of weather
+  windSpeed: number = 5; // negative or positive based on the type of weather
   backgroundValues: string = ""; // Green blue values for the sky
   r: number = 0;
   g: number = 0;
