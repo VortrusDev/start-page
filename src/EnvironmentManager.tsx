@@ -1,6 +1,6 @@
 // Manages everything related to the environment such as wind speed, etc
 
-export const dayNightCycleMinutes = 5; // 20 mins for a full day night cycle
+export const dayNightCycleMinutes = 20; // 20 mins for a full day night cycle
 const bias = 1; // multiplied with the input of the day/night cycle thing to make
 // days longer
 
@@ -10,7 +10,7 @@ export enum EnvironmentModes {
 }
 
 export class EnvironmentManager {
-  windSpeed: number = 5; // negative or positive based on the type of weather
+  windSpeed: number = 1; // negative or positive based on the type of weather
   backgroundValues: string = ""; // Green blue values for the sky
   r: number = 0;
   g: number = 0;
