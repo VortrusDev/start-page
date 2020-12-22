@@ -23,6 +23,24 @@ export class TreeRenderer extends GenericRenderer {
     */
     this.changeColor("brown");
 
-    this.drawRect(this.root.position, new Vec2(100, 100));
+    this.drawRect(this.root.position, new Vec2(50, 100));
+
+    this.changeColor("green");
+
+    this.drawTriangle(
+      new Vec2(
+        this.root.position.x + 25,
+        this.root.position.y - 200 * this.root.scale.y
+      ),
+      new Vec2(this.root.scale.x * 175, this.root.scale.y * 250)
+    );
+
+    this.drawTriangle(
+      new Vec2(
+        this.root.position.x + 25,
+        this.root.position.y - 275 * this.root.scale.y
+      ),
+      new Vec2(this.root.scale.x * 150, this.root.scale.y * 225)
+    );
   }
 }

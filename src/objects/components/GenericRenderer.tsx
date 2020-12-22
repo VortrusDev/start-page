@@ -91,9 +91,11 @@ export class GenericRenderer implements Renderer {
 
     this.ctx.beginPath();
     this.ctx.moveTo(position.x, position.y); // We'll just keep the origin as the top point
-    this.ctx.lineTo(position.x - scale.x / 2, position.y - scale.y);
+    this.ctx.lineTo(position.x - scale.x / 2, position.y + scale.y);
+    this.ctx.lineTo(position.x + scale.x / 2, position.y + scale.y);
     this.ctx.lineTo(position.x, position.y);
     this.ctx.fill();
+
     this.ctx.closePath();
   }
 

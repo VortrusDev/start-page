@@ -141,8 +141,8 @@ class App extends PureComponent<AppProps, AppState> {
       new Tree(
         this.objectManager,
         this.environmentManager,
-        new Vec2(100, 200),
-        new Vec2(50, 50)
+        new Vec2(100, 425),
+        new Vec2(1, 1)
       )
     );
   };
