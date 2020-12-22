@@ -1,14 +1,19 @@
 // Renderer for trees
 import { EnvironmentManager } from "../../EnvironmentManager";
 import { SimObject } from "../SimObject";
-import { SubtractVectors, Vec2 } from "../Vector";
+import { AddVectors, SubtractVectors, Vec2 } from "../Vector";
 import { GenericRenderer, RenderModes } from "./GenericRenderer";
 export class TreeRenderer extends GenericRenderer {
   environmentManager: EnvironmentManager;
 
-  constructor(root: SimObject, environmentManager: EnvironmentManager) {
+  constructor(
+    root: SimObject,
+    environmentManager: EnvironmentManager,
+    zIndex: number
+  ) {
     super(root);
     this.environmentManager = environmentManager;
+    this.zIndex = zIndex;
   }
 
   render() {
@@ -23,7 +28,18 @@ export class TreeRenderer extends GenericRenderer {
     */
     this.changeColor("brown");
 
-    this.drawRect(this.root.position, new Vec2(50, 100));
+    this.drawRect(
+      this.root.scale.x > 1
+        ? SubtractVectors(
+            this.root.position,
+            new Vec2(this.root.scale.x * 5, this.root.scale.y * 5)
+          )
+        : AddVectors(
+            this.root.position,
+            new Vec2(this.root.scale.x * 5, this.root.scale.y * 5)
+          ),
+      new Vec2(50 * this.root.scale.x, 100 * this.root.scale.y)
+    );
 
     this.changeColor("green");
 

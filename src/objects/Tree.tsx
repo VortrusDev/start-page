@@ -16,7 +16,7 @@ export class Tree extends SimObject {
     initialScale?: Vec2
   ) {
     super(objectManager, environmentManager, initialPosition, initialScale);
-    this.renderer = new TreeRenderer(this, environmentManager);
+    this.renderer = new TreeRenderer(this, environmentManager, 2);
     this.objectManager.RendererList.push(this.renderer);
   }
 }

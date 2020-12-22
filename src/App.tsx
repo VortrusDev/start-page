@@ -145,6 +145,24 @@ class App extends PureComponent<AppProps, AppState> {
         new Vec2(1, 1)
       )
     );
+
+    this.objectManager.addObject(
+      new Tree(
+        this.objectManager,
+        this.environmentManager,
+        new Vec2(300, 405),
+        new Vec2(0.75, 0.75)
+      )
+    );
+
+    this.objectManager.addObject(
+      new Tree(
+        this.objectManager,
+        this.environmentManager,
+        new Vec2(100, 425),
+        new Vec2(1, 1)
+      )
+    );
   };
 
   setUpCanvas = () => {
