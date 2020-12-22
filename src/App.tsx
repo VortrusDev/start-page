@@ -22,6 +22,7 @@ import {
 } from "./objects/components/ParticleSystem";
 import { BackgroundGrass } from "./objects/BackgroundGrass";
 import { EnvironmentManager, EnvironmentModes } from "./EnvironmentManager";
+import { Tree } from "./objects/Tree";
 
 const LocalStorageKeyPrefix = "StartPageLink:";
 
@@ -133,6 +134,15 @@ class App extends PureComponent<AppProps, AppState> {
         new Vec2(550, 550),
         this.environmentManager,
         "green"
+      )
+    );
+
+    this.objectManager.addObject(
+      new Tree(
+        this.objectManager,
+        this.environmentManager,
+        new Vec2(100, 200),
+        new Vec2(50, 50)
       )
     );
   };

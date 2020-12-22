@@ -72,6 +72,31 @@ export class GenericRenderer implements Renderer {
     this.ctx.lineWidth = oldStrokeWidth;
   }
 
+  drawRect(position: Vec2, scale: Vec2) {
+    if (!this.ctx) {
+      console.error("No canvas context available to work with.");
+      return;
+    }
+    this.ctx.beginPath();
+    this.ctx.rect(position.x, position.y, scale.x, scale.y);
+    this.ctx.fill();
+    this.ctx.closePath();
+  }
+
+  drawTriangle(position: Vec2, scale: Vec2) {
+    if (!this.ctx) {
+      console.error("No canvas context available to work with.");
+      return;
+    }
+
+    this.ctx.beginPath();
+    this.ctx.moveTo(position.x, position.y); // We'll just keep the origin as the top point
+    this.ctx.lineTo(position.x - scale.x / 2, position.y - scale.y);
+    this.ctx.lineTo(position.x, position.y);
+    this.ctx.fill();
+    this.ctx.closePath();
+  }
+
   changeColor(newColor: any) {
     if (!this.ctx) {
       console.error("No canvas context available to work with.");
