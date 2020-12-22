@@ -150,7 +150,7 @@ class App extends PureComponent<AppProps, AppState> {
       new Tree(
         this.objectManager,
         this.environmentManager,
-        new Vec2(300, 405),
+        new Vec2(300, 415),
         new Vec2(0.75, 0.75)
       )
     );
@@ -159,8 +159,26 @@ class App extends PureComponent<AppProps, AppState> {
       new Tree(
         this.objectManager,
         this.environmentManager,
-        new Vec2(100, 425),
+        new Vec2(500, 425),
         new Vec2(1, 1)
+      )
+    );
+
+    this.objectManager.addObject(
+      new Tree(
+        this.objectManager,
+        this.environmentManager,
+        new Vec2(700, 450),
+        new Vec2(1.25, 1.25)
+      )
+    );
+
+    this.objectManager.addObject(
+      new Tree(
+        this.objectManager,
+        this.environmentManager,
+        new Vec2(1050, 400),
+        new Vec2(0.95, 0.95)
       )
     );
   };
