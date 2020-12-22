@@ -9,6 +9,8 @@ export enum EnvironmentModes {
   // based upon the real life time and an algorithm
 }
 
+export let bgColor: string; // I know this breaks flow a bit, I'm just doing this to be quick
+
 export class EnvironmentManager {
   windSpeed: number = 1; // negative or positive based on the type of weather
   backgroundValues: string = ""; // Green blue values for the sky
@@ -58,6 +60,7 @@ export class EnvironmentManager {
       this.textG = 255 - val;
       this.textB = 255 - val;
       this.backgroundValues = `rgb(0, ${val * bias}, ${val * bias})`;
+      bgColor = this.backgroundValues;
     }
 
     this.textColorCallback();

@@ -23,7 +23,9 @@ import {
 import { BackgroundGrass } from "./objects/BackgroundGrass";
 import { EnvironmentManager, EnvironmentModes } from "./EnvironmentManager";
 import { Tree } from "./objects/Tree";
-
+import { Moon } from "./objects/Moon";
+import { Mask } from "./objects/Mask";
+import { bgColor } from "./EnvironmentManager";
 const LocalStorageKeyPrefix = "StartPageLink:";
 
 interface AppProps {}
@@ -181,6 +183,26 @@ class App extends PureComponent<AppProps, AppState> {
         new Vec2(0.95, 0.95)
       )
     );
+
+    this.objectManager.addObject(
+      new Moon(
+        this.objectManager,
+        new Vec2(window.innerWidth / 2 - 250, window.innerHeight / 2 - 100),
+        new Vec2(60, 60),
+        this.environmentManager,
+        "yellow"
+      )
+    );
+
+    this.objectManager.addObject(
+      new Mask(
+        this.objectManager,
+        new Vec2(window.innerWidth / 2 - 220, window.innerHeight / 2 - 100),
+        new Vec2(60, 60),
+        this.environmentManager,
+        bgColor
+      )
+    );
   };
 
   setUpCanvas = () => {
@@ -273,6 +295,11 @@ class App extends PureComponent<AppProps, AppState> {
                 <h2
                   className="App-description"
                   style={{
+                    backgroundColor: `rgba(${
+                      255 - this.environmentManager.textR
+                    },${255 - this.environmentManager.textG},${
+                      255 - this.environmentManager.textB
+                    }, 0.25)`,
                     color: `rgb(${this.environmentManager.textR},${this.environmentManager.textG},${this.environmentManager.textB})`,
                   }}
                 >
