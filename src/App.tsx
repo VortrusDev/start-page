@@ -265,7 +265,7 @@ class App extends PureComponent<AppProps, AppState> {
                   Hello and welcome!
                 </h1>
                 <h2
-                  className="App-description"
+                  className="App-description btn btn-rounded btn-lg"
                   style={{
                     backgroundColor: `rgba(${
                       255 - this.environmentManager.textR
@@ -286,6 +286,7 @@ class App extends PureComponent<AppProps, AppState> {
                   }}
                 >
                   <em
+                    className="btn btn-rounded btn-lg"
                     style={{
                       backgroundColor: `rgba(${
                         255 - this.environmentManager.textR

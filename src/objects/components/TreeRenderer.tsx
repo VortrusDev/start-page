@@ -49,7 +49,7 @@ export class TreeRenderer extends GenericRenderer {
     // 0 - 255
     let greenV = (this.environmentManager.g / 255) * 100 + 100;
 
-    this.changeColor(`rgb(0, ${greenV}, 0)`);
+    this.changeColor(`rgb(0, ${greenV - 10}, 0)`);
 
     this.drawTriangle(
       new Vec2(
@@ -58,6 +58,8 @@ export class TreeRenderer extends GenericRenderer {
       ),
       new Vec2(this.root.scale.x * 175, this.root.scale.y * 250)
     );
+
+    this.changeColor(`rgb(0, ${greenV}, 0)`);
 
     this.drawTriangle(
       new Vec2(
