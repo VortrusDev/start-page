@@ -19,7 +19,16 @@ export class Mask extends SimObject {
   ) {
     super(manager, environmentManager, initialPosition);
     this.addComponent(
-      new CircleRenderer(this, initialPosition, initialScale.x, color, 3)
+      new CircleRenderer(
+        this,
+        initialPosition,
+        initialScale.x,
+        color,
+        3,
+        false,
+        0,
+        RenderModes.xor
+      )
     ) as CircleRenderer;
   }
 }

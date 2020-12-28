@@ -54,16 +54,10 @@ class App extends PureComponent<AppProps, AppState> {
     };
 
     this.loadLocalStorageKeys();
+
     this.environmentManager = new EnvironmentManager(
       EnvironmentModes.TimeBased,
-      () =>
-        this.setState({
-          TextColorChange: [
-            this.environmentManager.textR,
-            this.environmentManager.textG,
-            this.environmentManager.textB,
-          ],
-        })
+      () => {}
     );
     this.objectManager = new ObjectManager(this.environmentManager);
 
@@ -183,26 +177,6 @@ class App extends PureComponent<AppProps, AppState> {
         new Vec2(0.95, 0.95)
       )
     );
-
-    this.objectManager.addObject(
-      new Moon(
-        this.objectManager,
-        new Vec2(window.innerWidth / 2 - 250, window.innerHeight / 2 - 100),
-        new Vec2(60, 60),
-        this.environmentManager,
-        "yellow"
-      )
-    );
-
-    this.objectManager.addObject(
-      new Mask(
-        this.objectManager,
-        new Vec2(window.innerWidth / 2 - 220, window.innerHeight / 2 - 100),
-        new Vec2(60, 60),
-        this.environmentManager,
-        bgColor
-      )
-    );
   };
 
   setUpCanvas = () => {
@@ -244,8 +218,6 @@ class App extends PureComponent<AppProps, AppState> {
 
   handleAddLink = (link: string, alias?: string) => {
     link = this.fixLinkFormat(link);
-
-    console.log("Adding link " + link);
 
     // Add to user preferences so we can read it when they return
 
@@ -313,7 +285,17 @@ class App extends PureComponent<AppProps, AppState> {
                     color: `rgb(${this.environmentManager.textR},${this.environmentManager.textG},${this.environmentManager.textB})`,
                   }}
                 >
-                  <em>{getCurrentMoonPhase().details}</em>
+                  <em
+                    style={{
+                      backgroundColor: `rgba(${
+                        255 - this.environmentManager.textR
+                      },${255 - this.environmentManager.textG},${
+                        255 - this.environmentManager.textB
+                      }, 0.25)`,
+                    }}
+                  >
+                    {getCurrentMoonPhase().details}
+                  </em>
                 </p>
               </>
             )}
@@ -330,7 +312,7 @@ class App extends PureComponent<AppProps, AppState> {
                 <button
                   form="Search-form"
                   id="Search-button"
-                  className="btn btn-outline-primary btn-rounded waves-effect"
+                  className="btn btn-primary btn-rounded waves-effect"
                 >
                   Search
                 </button>

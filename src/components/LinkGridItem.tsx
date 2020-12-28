@@ -23,7 +23,7 @@ export class LinkGridItem extends PureComponent<
           id={`${this.props.link.toString()}form`}
         >
           <div
-            className="LinkGridItem btn btn-outline-primary btn-rounded waves-effect"
+            className="LinkGridItem btn btn-primary btn-rounded waves-effect"
             onClick={() =>
               (document.getElementById(
                 `${this.props.link.toString()}form`

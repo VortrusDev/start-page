@@ -3,6 +3,7 @@ import { EnvironmentManager } from "../../EnvironmentManager";
 import { SimObject } from "../SimObject";
 import { AddVectors, SubtractVectors, Vec2 } from "../Vector";
 import { GenericRenderer, RenderModes } from "./GenericRenderer";
+import { bgColor } from "../../EnvironmentManager";
 export class TreeRenderer extends GenericRenderer {
   environmentManager: EnvironmentManager;
 
@@ -26,7 +27,11 @@ export class TreeRenderer extends GenericRenderer {
       }, ${this.environmentManager.b + 30})`
     );
     */
-    this.changeColor("brown");
+    let brownV = [
+      (this.environmentManager.g / 255) * 100 + 100,
+      (this.environmentManager.g / 255) * 100 + 100,
+    ];
+    this.changeColor(`rgb(${brownV[0]}, ${brownV[1] / 3}, 0)`);
 
     this.drawRect(
       this.root.scale.x > 1
@@ -41,7 +46,10 @@ export class TreeRenderer extends GenericRenderer {
       new Vec2(50 * this.root.scale.x, 100 * this.root.scale.y)
     );
 
-    this.changeColor("green");
+    // 0 - 255
+    let greenV = (this.environmentManager.g / 255) * 100 + 100;
+
+    this.changeColor(`rgb(0, ${greenV}, 0)`);
 
     this.drawTriangle(
       new Vec2(

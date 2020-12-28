@@ -100,7 +100,7 @@ export class AddLinkModal extends PureComponent<
                 ></input>
                 <button
                   form="Add-link-form"
-                  className="btn btn-outline-primary btn-rounded waves-effect"
+                  className="btn btn-primary btn-rounded waves-effect"
                   style={{ height: "100%", verticalAlign: "top" }}
                 >
                   Add Link

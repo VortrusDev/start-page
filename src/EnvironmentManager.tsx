@@ -1,6 +1,6 @@
 // Manages everything related to the environment such as wind speed, etc
 
-export const dayNightCycleMinutes = 20; // 20 mins for a full day night cycle
+export const dayNightCycleMinutes = 3; // 20 mins for a full day night cycle
 const bias = 1; // multiplied with the input of the day/night cycle thing to make
 // days longer
 
