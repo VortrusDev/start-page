@@ -2,8 +2,7 @@
 import { EnvironmentManager } from "../../EnvironmentManager";
 import { SimObject } from "../SimObject";
 import { AddVectors, SubtractVectors, Vec2 } from "../Vector";
-import { GenericRenderer, RenderModes } from "./GenericRenderer";
-import { bgColor } from "../../EnvironmentManager";
+import { GenericRenderer } from "./GenericRenderer";
 export class TreeRenderer extends GenericRenderer {
   environmentManager: EnvironmentManager;
 

@@ -1,7 +1,6 @@
 // Trees for the background
 
 import { EnvironmentManager } from "../EnvironmentManager";
-import { GenericRenderer } from "./components/GenericRenderer";
 import { ObjectManager } from "../ObjectManager";
 import { SimObject } from "./SimObject";
 import { Vec2 } from "./Vector";

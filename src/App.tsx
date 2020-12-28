@@ -23,9 +23,6 @@ import {
 import { BackgroundGrass } from "./objects/BackgroundGrass";
 import { EnvironmentManager, EnvironmentModes } from "./EnvironmentManager";
 import { Tree } from "./objects/Tree";
-import { Moon } from "./objects/Moon";
-import { Mask } from "./objects/Mask";
-import { bgColor } from "./EnvironmentManager";
 const LocalStorageKeyPrefix = "StartPageLink:";
 
 interface AppProps {}
@@ -231,19 +228,15 @@ class App extends PureComponent<AppProps, AppState> {
   };
 
   handleRemoveLink = (linkIn: string) => {
-    console.log("removing link " + linkIn);
-
     localStorage.removeItem(`${LocalStorageKeyPrefix}${linkIn}`);
     localStorage.removeItem(`${LocalStorageKeyPrefix}${linkIn}_alias`);
     this.userAddedLinks = this.userAddedLinks.filter(
       (value: { link: string; alias?: string }) => {
-        console.log("value.link: " + value.link + "; link: " + linkIn);
         return value.link !== linkIn;
       }
     );
 
     this.setState({ RegeneratingLink: !this.state.RegeneratingLink });
-    console.log(this.userAddedLinks);
   };
 
   render() {

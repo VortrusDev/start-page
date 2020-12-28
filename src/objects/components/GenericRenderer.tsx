@@ -4,7 +4,6 @@ import { Renderer } from "./Renderer";
 import { CanvasId } from "../../helpers";
 import { Vec2 } from "../Vector";
 import { SimObject } from "../SimObject";
-import { EnvironmentManager } from "../../EnvironmentManager";
 
 export enum RenderModes {
   sourceOver = "source-over",

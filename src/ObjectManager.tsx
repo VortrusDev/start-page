@@ -5,7 +5,7 @@ import { SimObject } from "./objects/SimObject";
 import { CanvasId, cullingDeadzone, deadzone } from "./helpers";
 import { Vec2 } from "./objects/Vector";
 import { GenericRenderer } from "./objects/components/GenericRenderer";
-import { EnvironmentManager, EnvironmentModes } from "./EnvironmentManager";
+import { EnvironmentManager } from "./EnvironmentManager";
 
 // Also it runs all render functions and sets the background correctly so that
 // there isn't flicker
@@ -90,7 +90,6 @@ export class ObjectManager {
       }
       this.canvasInstance = inst;
     }
-
     this.canvasInstance
       .getContext("2d")
       ?.clearRect(0, 0, this.canvasInstance.width, this.canvasInstance.height);
@@ -119,8 +118,10 @@ export class ObjectManager {
   };
 
   drawCanvasToBackground = () => {
-    document.body.style.background = `url(${this.canvasInstance!.toDataURL()})`;
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.backgroundAttachment = "fixed";
+    if (!this.canvasInstance) {
+      console.error("No instance to work with.");
+      return;
+    }
+    document.body.style.background = `url(${this.canvasInstance.toDataURL()})`;
   };
 }
